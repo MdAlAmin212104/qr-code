@@ -1,12 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "47aca8f4a792da41fcf02ab97b04288a"
-name = "qr-code"
+client_id = "f48df305781ddb7463912b773e4cb1b5"
+name = "qu code genaretor"
 application_url = "https://example.com"
 embedded = true
-
-[build]
-automatically_update_urls_on_dev = true
 
 [webhooks]
 api_version = "2026-01"
@@ -17,3 +14,6 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [ "https://example.com/api/auth" ]
+
+[build]
+automatically_update_urls_on_dev = true

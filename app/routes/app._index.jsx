@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useLoaderData, Link } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 
@@ -111,9 +112,9 @@ export default function Index() {
 
   return (
     <s-page heading="QR codes">
-      <s-link slot="secondary-actions" href="/app/qrcodes/new">
+      <s-button slot="secondary-actions" href="/app/qrcodes/new">
         Create QR code
-      </s-link>
+      </s-button>
       {qrCodes.length === 0 ? (
         <EmptyQRCodeState />
       ) : (

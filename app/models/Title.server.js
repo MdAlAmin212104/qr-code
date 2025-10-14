@@ -18,3 +18,10 @@ export async function createTitle(data) {
   });
 }
 
+
+
+export async function allDataTitles() {
+    return await db.title.findMany(
+        {orderBy: { createdAt: 'desc' }}
+    )
+}

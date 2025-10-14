@@ -6,7 +6,6 @@ import {
   useNavigation,
   useNavigate,
   useParams,
-  Link,
 } from "react-router";
 import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
@@ -151,13 +150,13 @@ export default function QRCodeForm() {
     <>
       <form data-save-bar onSubmit={handleSave} onReset={handleReset}>
         <s-page heading={initialFormState.title || "Create QR code"}>
-          <s-link
+          <s-button
             href="/app"
             slot="breadcrumb-actions"
             onClick={(e) => (isDirty ? e.preventDefault() : navigate("/app/"))}
           >
             QR Codes
-          </s-link>
+          </s-button>
           {initialFormState.id &&
             <s-button slot="secondary-actions" onClick={handleDelete}>Delete</s-button>}
           <s-section heading="QR Code information">

@@ -19,12 +19,14 @@ export async function action({ request }) {
   try {
     const newTitle = await createTitle(data);
     return ({ success: true, title: newTitle });
-  } catch {
+  } catch (err) {
+    console.error("Error saving title:", err);
     return ({ error: "Failed to save title" }, { status: 500 });
   }
 }
 
 export default function InputPage() {
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const submit = useSubmit();
   const [form, setForm] = useState({ title: "", description: "" });
 
@@ -34,8 +36,33 @@ export default function InputPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await submit(form, { method: "post" });
+    shopify.toast.show("Product info saved!", { duration: 2000 });
     setForm({ title: "", description: "" }); // Reset form
   };
+
+  // ✅ Product Picker Function
+  async function selectProduct() {
+    try {
+      const products = await window.shopify.resourcePicker({
+        type: "product",
+        action: "select",
+        multiple: true,
+      });
+
+      if (!products?.length) return;
+
+      const selected = products.map((p) => ({
+        id: p.id,
+        title: p.title,
+        image: p.images?.[0]?.originalSrc,
+      }));
+
+      console.log("Selected Products:", selected);
+      setSelectedProducts(selected);
+    } catch (err) {
+      console.error("Error selecting products:", err);
+    }
+  }
 
   return (
     <s-page>
@@ -56,8 +83,25 @@ export default function InputPage() {
             onInput={handleChange}
           />
         </form>
+
       </s-section>
-      <s-section slot="aside" heading="Resources" />
+
+      <s-section slot="aside" heading="Resources">
+        <s-button onClick={selectProduct}>Select Products</s-button>
+
+        {selectedProducts.length > 0 && (
+          <div style={{ marginTop: "1rem" }}>
+            {selectedProducts.map((product) => (
+              <div key={product.id} style={{ marginBottom: "8px" }}>
+                <img src={product.image} alt={product.title} width="60" />
+                <s-text>{product.title}</s-text>
+              </div>
+              
+
+            ))}
+          </div>
+        )}
+      </s-section>
     </s-page>
   );
 }

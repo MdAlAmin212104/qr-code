@@ -109,7 +109,7 @@ export default function QRCodeForm() {
 
   function handleSave(e) {
     e.preventDefault();
-    
+
     const data = {
       title: formState.title,
       productId: formState.productId || "",
@@ -158,7 +158,8 @@ export default function QRCodeForm() {
             QR Codes
           </s-button>
           {initialFormState.id &&
-            <s-button slot="secondary-actions" onClick={handleDelete}>Delete</s-button>}
+            <s-button slot="secondary-actions" onClick={handleDelete}>Delete</s-button>
+          }
           <s-section heading="QR Code information">
             <s-stack gap="base">
               <s-text-field

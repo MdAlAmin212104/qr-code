@@ -70,6 +70,7 @@ export default function QRCodeForm() {
   const [formState, setFormState] = useState(qrCode);
   const errors = useActionData()?.errors || {};
   const isSaving = useNavigation().state === "submitting";
+  console.log(isSaving, "is Saving button click");
   const isDirty =
     JSON.stringify(formState) !== JSON.stringify(initialFormState);
 
@@ -107,7 +108,9 @@ export default function QRCodeForm() {
 
   const submit = useSubmit();
 
-  function handleSave() {
+  function handleSave(e) {
+    e.preventDefault();
+    
     const data = {
       title: formState.title,
       productId: formState.productId || "",

@@ -167,7 +167,15 @@ export default function InputPage() {
           <div style={{ marginTop: "1rem" }}>
             {selectedProducts.map((product) => (
               <div key={product.id} style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}>
-                <img src={product.image} alt={product.title} width="60" />
+                <s-clickable
+                  border="base"
+                  borderRadius="base"
+                  overflow="hidden"
+                  inlineSize="40px"
+                  blockSize="40px"
+                >
+                  <s-image objectFit="cover" src={product.image}></s-image>
+                </s-clickable>
                 <s-text>{product.title}</s-text>
               </div>
             ))}
@@ -176,33 +184,31 @@ export default function InputPage() {
       </s-section>
 
       <s-section heading="Saved Titles" subheading="List of all saved product titles">
-        <div style={{height: "300px", overflow: "scroll"}}>
+        <div style={{ height: "300px", overflowY: "auto" }}>
           {getTitleData && getTitleData.length > 0 ? (
-          <s-table>
-            <s-table-header>
-              <s-table-row>
-                <s-table-header-cell>ID</s-table-header-cell>
-                <s-table-header-cell>Title</s-table-header-cell>
-                <s-table-header-cell>Description</s-table-header-cell>
-                <s-table-header-cell>Date Created</s-table-header-cell>
-              </s-table-row>
-            </s-table-header>
-            <s-table-body>
-              {getTitleData.map((item, index) => (
-                <s-table-row key={item.id}>
-                  <s-table-cell>{index + 1}</s-table-cell>
-                  <s-table-cell>{item.title}</s-table-cell>
-                  <s-table-cell>{item.description || "N/A"}</s-table-cell>
-                  <s-table-cell>
-                    {new Date(item.createdAt).toDateString()}
-                  </s-table-cell>
-                </s-table-row>
-              ))}
-            </s-table-body>
-          </s-table>
-        ) : (
-          <s-text>No saved titles yet.</s-text>
-        )}
+            <s-table>
+              <s-table-header-row>
+                <s-table-header>ID</s-table-header>
+                <s-table-header>Title</s-table-header>
+                <s-table-header>Description</s-table-header>
+                <s-table-header>Date Created</s-table-header>
+              </s-table-header-row>
+              <s-table-body>
+                {getTitleData.map((item, index) => (
+                  <s-table-row key={item.id}>
+                    <s-table-cell>{index + 1}</s-table-cell>
+                    <s-table-cell>{item.title}</s-table-cell>
+                    <s-table-cell>{item.description || "N/A"}</s-table-cell>
+                    <s-table-cell>
+                      {new Date(item.createdAt).toDateString()}
+                    </s-table-cell>
+                  </s-table-row>
+                ))}
+              </s-table-body>
+            </s-table>
+          ) : (
+            <s-text>No saved titles yet.</s-text>
+          )}
         </div>
       </s-section>
     </s-page>

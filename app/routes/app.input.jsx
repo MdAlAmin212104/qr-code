@@ -131,7 +131,14 @@ export default function InputPage() {
   }
 
   return (
-    <s-page>
+    <s-page heading="input data store on database">
+      <s-button
+            href="/app"
+            slot="breadcrumb-actions"
+          >
+            QR Codes
+          </s-button>
+  <s-button slot="secondary-actions">Cancel</s-button>
       <s-section heading="Product Information">
         <form data-save-bar onSubmit={handleSubmit}>
           <s-stack gap="large">
